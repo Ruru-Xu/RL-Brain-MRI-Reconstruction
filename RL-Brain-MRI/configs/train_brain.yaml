@@ -1,0 +1,70 @@
+project_name: Brain_MRI
+num_steps: 16
+num_envs: 500
+update_epochs: 6
+num_minibatches: 32
+ppo_batch_size: 600
+use_amp: False
+total_timesteps: 150000000
+gamma: 0.99
+gae_lambda: 0.9
+clip_coef: 0.1
+clip_vloss: True
+norm_adv: True
+ent_coef: 0.08
+vf_coef: 0.3
+max_grad_norm: 0.5
+target_kl: null
+
+
+log_interval: 10
+eval_interval: 10  
+seed: 666
+budget: 16
+weight_decay: 0.0001
+device: cuda
+
+optim:
+  name: adamw
+  lr: 0.0004
+  weight_decay: 0.0001
+
+scheduler:
+  step_size: 800    
+  gamma: 0.98         
+  T_max: 10000        
+
+snapshot_dir: /***********/output
+load_from_snapshot_base_dir: /*********/models
+recon_model_path: /*********/t1ce/best_model.pt
+
+logging:
+  level: DEBUG
+
+hydra:
+  run:
+    dir: /*******/output/${now:%Y.%m.%d}/${now:%H%M%S}_${project_name}
+
+
+
+env:
+  envname: brain_env
+  val_shuffle: False
+  num_workers: 4
+  image_shape: [128, 128]
+  kspace_shape: [128, 128]
+  batch_size: ???
+  val_batch_size: 500
+  observation_space: [1, 128, 128]
+  use_weighted_sampler: True
+  train_path: /*******/train
+  val_path: /*************/val
+
+
+
+
+model:
+  _target_: rl.ppo_core.KspaceMaskedActorCritic_MT
+  action_space: ???
+  feature_dim: 128
+  mt_shape: [ 128 ]

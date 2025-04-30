@@ -1,0 +1,50 @@
+project_name: Brain_MRI
+num_envs: 300
+update_epochs: 6
+num_minibatches: 32
+ppo_batch_size: 600
+use_amp: False
+total_timesteps: 150000000
+gamma: 0.99
+gae_lambda: 0.9
+clip_coef: 0.1
+clip_vloss: True
+norm_adv: True
+ent_coef: 0.08
+vf_coef: 0.3
+max_grad_norm: 0.5
+target_kl: null
+
+device: cuda
+
+
+snapshot_dir: /********/output
+load_from_snapshot_base_dir: /***********/output_model/rl_sampling/t2
+recon_model_path: /*****/t2/best_model.pt
+eval_num_line: 16
+
+hydra:
+  run:
+    dir: /******/output/${now:%Y.%m.%d}/${now:%H%M%S}_${project_name}
+
+
+
+env:
+  envname: brain_env
+  val_shuffle: False
+  num_workers: 3
+  image_shape: [128, 128]
+  kspace_shape: [128, 128]
+  test_batch_size: 1 #520
+  observation_space: [1, 128, 128]
+  use_weighted_sampler: True
+  test_path: /********/test
+
+
+
+
+model:
+  _target_: rl.ppo_core.KspaceMaskedActorCritic_MT
+  action_space: ???
+  feature_dim: 128
+  mt_shape: [ 128 ]

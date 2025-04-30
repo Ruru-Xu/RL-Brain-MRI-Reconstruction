@@ -1,0 +1,13 @@
+{
+    "testing": [
+        {
+            "image": [
+                "/home/ruru/Documents/work/BraTS/BraTs2021/debug/test/BraTS2021_00066/BraTS2021_00066_flair.nii.gz",
+                "/home/ruru/Documents/work/BraTS/BraTs2021/debug/test/BraTS2021_00066/BraTS2021_00066_t1ce.nii.gz",
+                "/home/ruru/Documents/work/BraTS/BraTs2021/debug/test/BraTS2021_00066/BraTS2021_00066_t1.nii.gz",
+                "/home/ruru/Documents/work/BraTS/BraTs2021/debug/test/BraTS2021_00066/BraTS2021_00066_t2.nii.gz"
+            ],
+            "label": "/home/ruru/Documents/work/BraTS/BraTs2021/debug/test/BraTS2021_00066/BraTS2021_00066_seg.nii.gz"
+        }
+      ]
+}
